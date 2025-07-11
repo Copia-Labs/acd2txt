@@ -2,7 +2,55 @@
 
 This is a simple experimental tool that parses a Rockwell ACD file, extracts the ladder logic, and draws it in ASCII art using [Box-drawing characters](https://en.wikipedia.org/wiki/Box-drawing_characters) and writes it as a text file to disk. This is not production quality code and has only been very lightly tested and so it probably only works for a small subset of ACD files.
 
-If you can share an ACD file that doesn't work properly, feel free to file it with an issue, but as this tool is experimental, we can't promise a timely response.
+If you have any fun ideas for additional features or if you can share an ACD file that doesn't work properly, feel free to file it with an issue, but as this tool is experimental, we can't promise a timely response.
+
+This is an example of what the output looks like for a single routine.
+<details><summary>Example Output</summary>
+
+```
+Program: MainProgram > Routine: a1_MainRoutine
+
+ ╔═══╗  ┏━━━━━┓
+ ║ 1 ╟──┨ NOP ┠───┨
+ ╚═══╝  ┗━━━━━┛
+
+ ╔═══╗                        ┏━━━━━┓
+ ║ 2 ╟───┬────────────────────┨ JSR ┠────┬───┨
+ ╚═══╝   │     VectorDynamics ┨     ┃    │
+         │                  0 ┨     ┃    │
+         │                    ┗━━━━━┛    │
+         │                               │
+         │                       ┏━━━━━┓ │
+         ├───────────────────────┨ JSR ┠─┤
+         │ a2_Delta5D_PICK_PLACE ┨     ┃ │
+         │                     0 ┨     ┃ │
+         │                       ┗━━━━━┛ │
+         │                               │
+         │                   ┏━━━━━┓     │
+         └───────────────────┨ JSR ┠─────┘
+                a3_JogMaster ┨     ┃
+                           0 ┨     ┃
+                             ┗━━━━━┛
+
+ ╔═══╗     MCPM_Incremental_Move    Initiate_MCTO  Start_PickPlace          ┏━━━━━┓
+ ║ 3 ╟───┬──────────┨ ┠──────────┬───────┨ ┠─────────────┨ ┠────────────────┨ OTU ┠───┨
+ ╚═══╝   │                       │                                  unlatch ┨     ┃
+         │   MCPM_Absolute_Move  │                                          ┗━━━━━┛
+         ├───────────┨ ┠─────────┤
+         │                       │
+         │  MCPM_RzMove_Coupling │
+         ├───────────┨ ┠─────────┤
+         │                       │
+         │   MCPM_with_WorkTool  │
+         └───────────┨ ┠─────────┘
+
+ ╔═══╗  MCSCart  MCSRobot               ┏━━━━━┓
+ ║ 4 ╟────┨ ┠───────┨ ┠─────────────────┨ OTU ┠───┨
+ ╚═══╝                     Stop_Program ┨     ┃
+                                        ┗━━━━━┛
+```
+
+</details>
 
 ## Usage
 
