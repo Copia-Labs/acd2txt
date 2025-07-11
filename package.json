@@ -1,0 +1,26 @@
+{
+  "name": "acd2txt",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "tsx src/index.ts test/test.ACD -o test.ACD.txt"
+  },
+  "exports": {
+    "require": "./dist/index.cjs"
+  },
+  "author": "Copia Automation",
+  "description": "Renders Rockwell ladder logic as ASCII art into a text file",
+  "dependencies": {
+    "@copia-automation/acd-parser": "1.2.9",
+    "yargs": "^17.7.2",
+    "yoga-layout": "^3.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "@types/node": "^20.14.11",
+    "@types/yargs": "^17.0.32"
+  }
+}
